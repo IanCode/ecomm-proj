@@ -1,7 +1,14 @@
+using Couchbase;
+using Couchbase.Linq;
+
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+
+//using Neon.Xunit.Couchbase;
+//using Neon.Xunit;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
