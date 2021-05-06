@@ -170,8 +170,8 @@ namespace ShippingApi.Controllers
             {
                 var key = $"{product.ProductId}";
 
-                product.ShipDate = GetShipDate(product);
-                var upsertResult = await collection.UpsertAsync(key, product);
+                var p = GetShipDate(product);
+                var upsertResult = await collection.UpsertAsync(key, p);
             }
         }
 
@@ -180,7 +180,7 @@ namespace ShippingApi.Controllers
         /// </summary>
         /// <param name="product"></param>
         /// <returns></returns>
-        private DateTime GetShipDate(Product product)
+        private Product GetShipDate(Product product)
         {
             var orderDate = DateTime.Now.Date;
 
@@ -215,7 +215,10 @@ namespace ShippingApi.Controllers
                 shipDate = shipDate.AddDays(-1);
             }
 
-            return shipDate;
+            product.ShipDate = shipDate;
+            product.ShipDateFormatted = shipDate.ToShortDateString();
+
+            return product;
         }
     }
 }

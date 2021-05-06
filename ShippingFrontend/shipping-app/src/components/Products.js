@@ -39,7 +39,7 @@ export default class Products extends Component {
                             <div className="product-name">{product.productName}</div>
                             <div className="inventory-quantity">Inventory Quantity: {product.inventoryQuantity}</div>
                             {/* <div className="ship-on-weekends">Ship on Weekends? </div> */}
-                            <div className="max-days">Ship Date: {product.shipDate.toString()}</div>
+                            <div className="max-days">Ship Date: {product.shipDateFormatted}</div>
                         </div>
                     )
                 })}
