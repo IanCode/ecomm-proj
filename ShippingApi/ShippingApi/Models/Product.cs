@@ -28,6 +28,9 @@ namespace ShippingApi.Models
         [JsonProperty("shipDate")]
         public DateTime ShipDate { get; set; }
 
+        [JsonPropertyAttribute("shipDateFormatted")]
+        public string ShipDateFormatted { get; set; }
+
         public string Type => "product";
     }
 }
