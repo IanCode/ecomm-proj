@@ -42,3 +42,6 @@ Navigate to the folder ShippingFrontend/shipping-app and run:
 `npm i`
 
 `npm start`
+
+## Additional Notes
+I would like to add more robust testing that actually tests the logic of the shipdate calculations as well as load the couchbase test data using the tooling that couchbase provides, as this is the best practice.

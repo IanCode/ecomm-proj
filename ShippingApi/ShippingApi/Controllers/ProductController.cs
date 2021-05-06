@@ -56,6 +56,11 @@ namespace ShippingApi.Controllers
 
             var results = context.Query<Product>().ToList();
 
+            if(results.Count == 0)
+            {
+                return NotFound();
+            }
+
             foreach (var p in results)
             {
                 Console.WriteLine($"{p.ProductId}");
