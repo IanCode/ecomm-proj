@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Couchbase.Linq;
 using Microsoft.AspNetCore.Mvc.Testing;
 using System.Threading.Tasks;
+using System.Net;
 //using Couchbase.Extensions.DependencyInjection;
 
 namespace ShippingApi.Tests
@@ -30,8 +31,7 @@ namespace ShippingApi.Tests
 
             var products = response.Content;
 
-            response.EnsureSuccessStatusCode();
-            Assert.Equal(0, 0);
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
 
         [Fact]
