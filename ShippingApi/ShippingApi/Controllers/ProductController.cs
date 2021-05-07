@@ -197,8 +197,6 @@ namespace ShippingApi.Controllers
                 orderDate = product.OrderDate;
             }
 
-            DateTime shipDate = orderDate.Date.AddDays(product.MaxBusinessDaysToShip);
-
             var actualDaysToShip = product.MaxBusinessDaysToShip;
 
             // add days here to account for weekends
