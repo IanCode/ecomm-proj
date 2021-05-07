@@ -25,6 +25,12 @@ namespace ShippingApi.Models
         [JsonProperty("maxBusinessDaysToShip")]
         public int MaxBusinessDaysToShip { get; set; }
 
+        [JsonProperty("orderDate")]
+        public DateTime OrderDate { get; set; }
+
+        [JsonPropertyAttribute("orderDateFormatted")]
+        public string OrderDateFormatted { get; set; }
+
         [JsonProperty("shipDate")]
         public DateTime ShipDate { get; set; }
 

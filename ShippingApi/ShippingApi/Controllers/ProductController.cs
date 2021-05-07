@@ -36,16 +36,19 @@ namespace ShippingApi.Controllers
 
         [HttpPost]
         [Route("/products/insert")]
-        public async Task<string> InsertProduct(Product product)
+        public async Task<ActionResult<Product>> InsertProduct(Product product)
         {
-            var key = Guid.NewGuid().ToString();
             var context = new BucketContext(await _bucketProvider.GetBucketAsync());
 
             var collection = context.Bucket.DefaultCollection();
 
-            var upsertResult = await collection.UpsertAsync(key, product);
+            var key = $"{product.ProductId}";
 
-            return await Task.FromResult(key);
+            var p = GetShipDate(product);
+
+            var upsertResult = await collection.UpsertAsync(key, p);
+
+            return Ok(p);
         }
 
         [HttpGet]
@@ -189,39 +192,46 @@ namespace ShippingApi.Controllers
         {
             var orderDate = DateTime.Now.Date;
 
+            if (product.OrderDate != null)
+            {
+                orderDate = product.OrderDate;
+            }
+
             DateTime shipDate = orderDate.Date.AddDays(product.MaxBusinessDaysToShip);
+
+            var actualDaysToShip = product.MaxBusinessDaysToShip;
 
             // add days here to account for weekends
             if (!product.ShipOnWeekends)
             {
-                if(orderDate.DayOfWeek != DayOfWeek.Saturday || orderDate.DayOfWeek != DayOfWeek.Sunday)
-                {
-                    shipDate = shipDate.AddDays(-1);
-                }
+                var extraDays = 0;
+
                 for (int i = 0; i < product.MaxBusinessDaysToShip; i++)
                 {
-                    var date = orderDate.AddDays(i).Date;
+                    var date = orderDate.AddDays(i + extraDays).Date;
                     var dayOfWeek = date.DayOfWeek;
-                    if (dayOfWeek == DayOfWeek.Saturday || dayOfWeek == DayOfWeek.Friday)
+                    if (dayOfWeek == DayOfWeek.Saturday || dayOfWeek == DayOfWeek.Sunday)
                     {
                         if (date.DayOfWeek == DayOfWeek.Saturday)
                         {
-                            shipDate = shipDate.AddDays(2);
+                            extraDays++;
                         }
-                        if (date.DayOfWeek == DayOfWeek.Friday)
+                        if (date.DayOfWeek == DayOfWeek.Sunday)
                         {
-                            shipDate = shipDate.AddDays(3);
+                            extraDays++;
                         }
                     }
                 }
+                actualDaysToShip += extraDays;
             }
             else
             {
-                shipDate = shipDate.AddDays(-1);
+                //order date inclusive
+                actualDaysToShip--;
             }
 
-            product.ShipDate = shipDate;
-            product.ShipDateFormatted = shipDate.ToShortDateString();
+            product.ShipDate = orderDate.AddDays(actualDaysToShip).Date;
+            product.ShipDateFormatted = product.ShipDate.ToShortDateString();
 
             return product;
         }
