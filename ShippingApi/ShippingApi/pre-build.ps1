@@ -69,4 +69,14 @@ else
 	docker exec -it ce-6.5 /opt/couchbase/bin/cbq -e http://localhost:8091/ -u=Administrator -p=password --script="CREATE PRIMARY INDEX ON default;"
 	docker exec -it ce-6.5 /opt/couchbase/bin/cbq -e http://localhost:8091/ -u=Administrator -p=password --script="CREATE INDEX adaptive_default ON default(DISTINCT PAIRS(self));"
 	echo "Created indexes"
+
+	Start-Sleep -s 3
+
+	#uploads json data file to docker container
+	docker cp Data/products.json ce-6.5:/products.json
+	#docker cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH|-
+
+	docker exec -it ce-6.5 cbimport json -c localhost -u Administrator -p password -b default -d file://products.json -g %productId% -f list
+	#cbimport json -c couchbase://127.0.0.1 -u Administrator -p password \ -b default -d file:///data/lines.json -f lines -g key::%name% -t 4
+	echo "Loaded Test Data"
 }

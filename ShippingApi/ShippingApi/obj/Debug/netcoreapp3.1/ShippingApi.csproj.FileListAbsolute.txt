@@ -1,10 +1,7 @@
-C:\src\TestProject\ShippingApi\ShippingApi\obj\Debug\netcoreapp3.1\ShippingApi.csprojAssemblyReference.cache
-C:\src\TestProject\ShippingApi\ShippingApi\obj\Debug\netcoreapp3.1\ShippingApi.AssemblyInfoInputs.cache
-C:\src\TestProject\ShippingApi\ShippingApi\obj\Debug\netcoreapp3.1\ShippingApi.AssemblyInfo.cs
-C:\src\TestProject\ShippingApi\ShippingApi\obj\Debug\netcoreapp3.1\ShippingApi.csproj.CoreCompileInputs.cache
-C:\src\TestProject\ShippingApi\ShippingApi\obj\Debug\netcoreapp3.1\ShippingApi.MvcApplicationPartsAssemblyInfo.cache
 C:\src\TestProject\ShippingApi\ShippingApi\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\src\TestProject\ShippingApi\ShippingApi\bin\Debug\netcoreapp3.1\appsettings.json
+C:\src\TestProject\ShippingApi\ShippingApi\bin\Debug\netcoreapp3.1\Data\products.json
+C:\src\TestProject\ShippingApi\ShippingApi\bin\Debug\netcoreapp3.1\package-lock.json
 C:\src\TestProject\ShippingApi\ShippingApi\bin\Debug\netcoreapp3.1\ShippingApi.exe
 C:\src\TestProject\ShippingApi\ShippingApi\bin\Debug\netcoreapp3.1\ShippingApi.deps.json
 C:\src\TestProject\ShippingApi\ShippingApi\bin\Debug\netcoreapp3.1\ShippingApi.runtimeconfig.json
@@ -19,6 +16,10 @@ C:\src\TestProject\ShippingApi\ShippingApi\bin\Debug\netcoreapp3.1\Newtonsoft.Js
 C:\src\TestProject\ShippingApi\ShippingApi\bin\Debug\netcoreapp3.1\Remotion.Linq.dll
 C:\src\TestProject\ShippingApi\ShippingApi\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
 C:\src\TestProject\ShippingApi\ShippingApi\bin\Debug\netcoreapp3.1\System.Linq.Async.dll
+C:\src\TestProject\ShippingApi\ShippingApi\obj\Debug\netcoreapp3.1\ShippingApi.AssemblyInfoInputs.cache
+C:\src\TestProject\ShippingApi\ShippingApi\obj\Debug\netcoreapp3.1\ShippingApi.AssemblyInfo.cs
+C:\src\TestProject\ShippingApi\ShippingApi\obj\Debug\netcoreapp3.1\ShippingApi.csproj.CoreCompileInputs.cache
+C:\src\TestProject\ShippingApi\ShippingApi\obj\Debug\netcoreapp3.1\ShippingApi.MvcApplicationPartsAssemblyInfo.cache
 C:\src\TestProject\ShippingApi\ShippingApi\obj\Debug\netcoreapp3.1\staticwebassets\ShippingApi.StaticWebAssets.Manifest.cache
 C:\src\TestProject\ShippingApi\ShippingApi\obj\Debug\netcoreapp3.1\staticwebassets\ShippingApi.StaticWebAssets.xml
 C:\src\TestProject\ShippingApi\ShippingApi\obj\Debug\netcoreapp3.1\scopedcss\bundle\ShippingApi.styles.css
@@ -27,5 +28,4 @@ C:\src\TestProject\ShippingApi\ShippingApi\obj\Debug\netcoreapp3.1\ShippingApi.c
 C:\src\TestProject\ShippingApi\ShippingApi\obj\Debug\netcoreapp3.1\ShippingApi.dll
 C:\src\TestProject\ShippingApi\ShippingApi\obj\Debug\netcoreapp3.1\ShippingApi.pdb
 C:\src\TestProject\ShippingApi\ShippingApi\obj\Debug\netcoreapp3.1\ShippingApi.genruntimeconfig.cache
-C:\src\TestProject\ShippingApi\ShippingApi\bin\Debug\netcoreapp3.1\Data\products.json
-C:\src\TestProject\ShippingApi\ShippingApi\bin\Debug\netcoreapp3.1\package-lock.json
+C:\src\TestProject\ShippingApi\ShippingApi\obj\Debug\netcoreapp3.1\ShippingApi.csprojAssemblyReference.cache

@@ -28,13 +28,13 @@ namespace ShippingApi.Models
         [JsonProperty("orderDate")]
         public DateTime OrderDate { get; set; }
 
-        [JsonPropertyAttribute("orderDateFormatted")]
+        [JsonProperty("orderDateFormatted")]
         public string OrderDateFormatted { get; set; }
 
         [JsonProperty("shipDate")]
         public DateTime ShipDate { get; set; }
 
-        [JsonPropertyAttribute("shipDateFormatted")]
+        [JsonProperty("shipDateFormatted")]
         public string ShipDateFormatted { get; set; }
 
         public string Type => "product";

@@ -31,7 +31,7 @@ namespace ShippingApi.Controllers
             _bucketProvider = bucketProvider;
 
             // In production I would load data differently.
-            Task.Run(async () => await LoadProducts()).Wait();
+            //Task.Run(async () => await LoadProducts()).Wait();
         }
 
         [HttpPost]
@@ -57,6 +57,8 @@ namespace ShippingApi.Controllers
         {
             var context = new BucketContext(await _bucketProvider.GetBucketAsync());
 
+            var collection = context.Bucket.DefaultCollection();
+
             var results = context.Query<Product>().ToList();
 
             if(results.Count == 0)
@@ -64,13 +66,30 @@ namespace ShippingApi.Controllers
                 return NotFound();
             }
 
-            foreach (var p in results)
+            for(int i = 0; i < results.Count; i++)
             {
+                var p = results[i];
+
+                // default order date functionality
+                p.OrderDate = DateTime.Now.Date;
+                p.OrderDateFormatted = p.OrderDate.ToShortDateString();
+
+                // default ship date functionality
+                p = GetShipDate(p);
+
                 Console.WriteLine($"{p.ProductId}");
                 Console.WriteLine($"{p.ProductName}");
                 Console.WriteLine($"{p.InventoryQuantity}");
                 Console.WriteLine($"{p.ShipOnWeekends}");
                 Console.WriteLine($"{p.MaxBusinessDaysToShip}");
+                Console.WriteLine($"orderdate: {p.OrderDateFormatted}");
+                Console.WriteLine($"shipdate: {p.ShipDateFormatted}");
+
+                // update the product in the db
+                var key = $"{p.ProductId}";
+                var upsertResult = await collection.UpsertAsync(key, p);
+
+                results[i] = p;
             }
 
             return Ok(results);
@@ -98,89 +117,6 @@ namespace ShippingApi.Controllers
             var shipDate = GetShipDate(product);
 
             return Ok(shipDate);
-        }
-
-        private async Task LoadProducts()
-        {
-            var context = new BucketContext(await _bucketProvider.GetBucketAsync());
-
-            var collection = context.Bucket.DefaultCollection();
-
-            var products = new List<Product>()
-            {
-                new Product()
-                {
-                    ProductId = 1,
-                    ProductName = "fugiat exercitation adipisicing",
-                    InventoryQuantity = 43,
-                    ShipOnWeekends = true,
-                    MaxBusinessDaysToShip = 13
-                },
-                new Product()
-                {
-                    ProductId = 2,
-                    ProductName = "mollit cupidatat Lorem",
-                    InventoryQuantity = 70,
-                    ShipOnWeekends = true,
-                    MaxBusinessDaysToShip = 18
-                },
-                new Product()
-                {
-                    ProductId = 3,
-                    ProductName = "non quis sint",
-                    InventoryQuantity = 33,
-                    ShipOnWeekends = false,
-                    MaxBusinessDaysToShip = 15
-                },
-                new Product()
-                {
-                    ProductId = 4,
-                    ProductName = "voluptate cupidatat non",
-                    InventoryQuantity = 52,
-                    ShipOnWeekends = false,
-                    MaxBusinessDaysToShip = 18
-                },
-                new Product()
-                {
-                    ProductId = 5,
-                    ProductName = "anim amet occaecat",
-                    InventoryQuantity = 39,
-                    ShipOnWeekends = true,
-                    MaxBusinessDaysToShip = 19
-                },
-                new Product()
-                {
-                    ProductId = 6,
-                    ProductName = "cillum deserunt elit",
-                    InventoryQuantity = 47,
-                    ShipOnWeekends = false,
-                    MaxBusinessDaysToShip = 20
-                },
-                new Product()
-                {
-                    ProductId = 7,
-                    ProductName = "adipisicing reprehenderit et",
-                    InventoryQuantity = 71,
-                    ShipOnWeekends = false,
-                    MaxBusinessDaysToShip = 15
-                },
-                new Product()
-                {
-                    ProductId = 8,
-                    ProductName = "ex mollit laboris",
-                    InventoryQuantity = 80,
-                    ShipOnWeekends = false,
-                    MaxBusinessDaysToShip = 15
-                },
-            };
-
-            foreach(var product in products)
-            {
-                var key = $"{product.ProductId}";
-
-                var p = GetShipDate(product);
-                var upsertResult = await collection.UpsertAsync(key, p);
-            }
         }
 
         /// <summary>
